@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.shidengke.mapper.ArticleMapper">
+      <select id="getList" resultType="com.shidengke.entity.Article">
+     		select a.id,a.title,a.created,a.hot,u.username from cms_article a,cms_user u
+  			where a.user_id=u.id
+  			<if test="y1!=null and y1!=''">
+  				and a.created>=#{y1}
+  			</if>
+  			<if test="y2!=null and y2!=''">
+  				and a.created&lt;=#{y2}
+  			</if>
+  			<if test="choice!=null and choice!=''">
+  				ORDER BY ${choice} desc
+  			</if>
+      
+      </select>
+  
+  
+  </mapper>
